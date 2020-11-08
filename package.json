@@ -7,12 +7,13 @@
     },
   "main": "index.js",
   "scripts": {
-      "dev": "react-scripts start",
+
+      "dev": "npm start",
       "start": "serve -s build",
-      "build": "react-scripts build",
+      "build": "npm run start",
       "test": "react-scripts test --env=jsdom",
       "eject": "react-scripts eject",
-      "heroku-postbuild": "npm run start"
+      "heroku-postbuild": "npm run build"
   },
   
   "author": "Tomás Longobardi",
