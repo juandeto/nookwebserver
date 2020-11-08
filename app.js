@@ -25,6 +25,6 @@ app.post("/emails/create", emails.create);
 app.post("/mercadopago/create", mpRoutes.create);
 app.get("/mercadopago/finish", mpRoutes.finish);
 
-app.listen(8080, () => {console.log("The server is now running on Port 8080")});
+app.listen((process.env.PORT || 5000), () => {console.log("The server is now running on Port 8080")});
 
 module.exports = app;
