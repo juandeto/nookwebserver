@@ -27,7 +27,6 @@ app.get("/mercadopago/finish", mpRoutes.finish);
 
 const PORT = process.env.PORT || 8080;
 
-console.log(process.env.USER)
 
 app.listen(PORT, () => {console.log("The server is now running on Port 8080")});
 
