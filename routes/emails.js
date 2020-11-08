@@ -27,6 +27,7 @@ const sendEmail = (to, subject, html) => {
 }
 
 exports.create = (req, res) => {
+    console.log(req.body);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json('Sending Email!');
