@@ -57,6 +57,7 @@ exports.finish =  async function (req, res, next) {
       phone = p.data.payer.phone.number;
     } catch (error) {
       console.log(error);
+      return next(error)
     }
     if (req.query.status[0] == 'pending') res.redirect('https://nookdeco.com.ar/pagos?email='+email+'&phone='+phone);
     else res.redirect('https://nookdeco.com.ar/pagos?email='+email+'&phone='+phone);
@@ -114,5 +115,6 @@ exports.create = async function (req, res, next) {
         return res;
     } catch(e) {
         res.end(e.message || e.toString());
+        return next(error)
     }
 };
