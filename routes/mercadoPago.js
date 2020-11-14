@@ -40,7 +40,7 @@ const sendEmail = (data) => {
   });
 }
 
-exports.finish =  async function (req, res, next) {
+exports.finish =  (async function (req, res, next) {
     var p;
     var email;
     var phone;
@@ -62,9 +62,9 @@ exports.finish =  async function (req, res, next) {
     // Cambiar http://localhost:3000/ por dominio real en producción.
     // Deberías cambiar el path de la url pending de /pagos al path que elijas para RapiPago y PagoFacil.
     sendEmail(p.data);
-}; 
+} )().catch( e => { console.error(e) })
 
-exports.create = async function (req, res, next) {
+exports.create = (async function (req, res, next) {
     // Recordar setear ACCESS_TOKEN en .env con la credencial de Access Token de MercadoPago.
     mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN
@@ -114,4 +114,4 @@ exports.create = async function (req, res, next) {
     } catch(e) {
         res.end(e.message || e.toString());
     }
-};
+})().catch( e => { console.error(e) })
