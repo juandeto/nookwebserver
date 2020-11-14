@@ -5,11 +5,7 @@ var nodemailer    = require('nodemailer')
 const transporter = nodemailer.createTransport({
     // Cambiar los datos según mail que se utilizará para el manejo de emails.
     // Yo utilicé este que es para hacer pruebas, generé ese usuario en https://ethereal.email/ y llegan las pruebas allí.
-<<<<<<< HEAD
-    host: 'smtp.mail.yahoo.com',
-=======
     host: 'https://smtp.mail.yahoo.com',
->>>>>>> a239e38329bbf181df628cb61cecd05428d54f00
     port: 465,
     auth: {
         // Se setean en archivo .env
@@ -50,7 +46,7 @@ exports.finish =  async function (req, res, next) {
     var phone;
     // Recordar setear ACCESS_TOKEN en .env con la credencial de Access Token de MercadoPago.
     const token = process.env.ACCESS_TOKEN;
-    try {
+    (async () =>{ try {
         p = await axios.get("https://api.mercadopago.com/checkout/preferences/"+req.query.preference_id, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -61,6 +57,7 @@ exports.finish =  async function (req, res, next) {
     } catch (error) {
       console.log(error);
     }
+    })();
     if (req.query.status[0] == 'pending') res.redirect('https://nookdeco.com.ar/pagos?email='+email+'&phone='+phone);
     else res.redirect('https://nookdeco.com.ar/pagos?email='+email+'&phone='+phone);
     // Cambiar http://localhost:3000/ por dominio real en producción.
@@ -68,7 +65,7 @@ exports.finish =  async function (req, res, next) {
     sendEmail(p.data);
 }; 
 
-exports.create = async function (req, res, next) {
+exports.create = (async function (req, res, next) {
     // Recordar setear ACCESS_TOKEN en .env con la credencial de Access Token de MercadoPago.
     mercadopago.configure({
         access_token: process.env.ACCESS_TOKEN
@@ -118,4 +115,9 @@ exports.create = async function (req, res, next) {
     } catch(e) {
         res.end(e.message || e.toString());
     }
-};
+}).then(res => {
+    console.log(res);
+    return res
+}).catch((e) => {
+    console.log('handle error here: ', e.message)
+ } )
