@@ -3,11 +3,8 @@ var nodemailer    = require('nodemailer')
 const transporter = nodemailer.createTransport({
     // Cambiar los datos según mail que se utilizará para el manejo de emails.
     // Yo utilicé este que es para hacer pruebas, se pueden ver la pruebas en https://ethereal.email/messages/5fa37f38ccbc44346152dc1e/22
-    service: 'gmail',
     host: 'smtp.mail.gmail.com',
-    port: 587,
-    secure: false,
-    requireTLS: true,
+    port: 465,
     auth: {
         // Se setean en archivo .env
         user: process.env.USER,
