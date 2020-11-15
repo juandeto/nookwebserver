@@ -31,7 +31,7 @@ app.post("/emails/create", emails.create);
 app.post("/mercadopago/create", mpRoutes.create);
 app.get("/mercadopago/finish", mpRoutes.finish);
 
-socket = io.listen(process.env.PORT);
+
 const server_port = process.env.PORT || 8080;
 const server_host = '0.0.0.0'
 
