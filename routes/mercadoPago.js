@@ -115,6 +115,6 @@ exports.create = async function (req, res, next) {
         return res;
     } catch(e) {
         res.end(e.message || e.toString());
-        return next(error)
+        return next(e)
     }
 };
