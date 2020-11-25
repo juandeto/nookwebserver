@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
 
  
 const sendEmail = (data) => {
+    console.log(data)
   var productos   = "";
   var totalAmount = 0;
   for(var i=0;i<data.items.length;i++){
@@ -46,7 +47,7 @@ exports.finish =  async function (req, res, next) {
     var email;
     var phone;
     // Recordar setear ACCESS_TOKEN en .env con la credencial de Access Token de MercadoPago.
-    const token = process.env.ACCESS_TOKEN;
+    const token =process.env.ACCESS_TOKEN;
     try {
         p = await axios.get("https://api.mercadopago.com/checkout/preferences/"+req.query.preference_id, {
             headers: {
@@ -69,7 +70,7 @@ exports.finish =  async function (req, res, next) {
 exports.create = async function (req, res, next) {
     // Recordar setear ACCESS_TOKEN en .env con la credencial de Access Token de MercadoPago.
     mercadopago.configure({
-        access_token: process.env.ACCESS_TOKEN
+        access_token:process.env.ACCESS_TOKEN
     });
     try {
         let preference = {
